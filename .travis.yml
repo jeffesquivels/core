@@ -11,8 +11,6 @@ env:
     # include $HOME/.local/bin for `aws`
     - PATH=$HOME/.local/bin:$PATH
     - CHROME_BIN=/usr/bin/google-chrome
-    - CC=gcc-4.9
-    - CXX=g++-4.9
 
 addons:
   apt:
@@ -32,7 +30,10 @@ install: true
 jobs:
   include:
     - stage: build nimiq
-      env: BUILD=true
+      env:
+        - BUILD=true
+        - CC=gcc-4.9
+        - CXX=g++-4.9
       script:
         - npm install -g gulp
         - yarn
@@ -43,7 +44,10 @@ jobs:
         - cp node_modules.tar.gz ~/shared
         - if [ ! -z "$AWS_ACCESS_KEY_ID" ]; then aws s3 sync ~/shared s3://nimiq-travis-builds/shared/$TRAVIS_BUILD_ID --region eu-central-1; fi
     - stage: build nimiq
-      env: TO_TEST=ESLint
+      env:
+        - TO_TEST=ESLint
+        - CC=gcc-4.9
+        - CXX=g++-4.9
       script:
         - npm install -g gulp
         - yarn
