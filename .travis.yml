@@ -114,8 +114,10 @@ jobs:
         apt:
           sources:
           - google-chrome
+          - ubuntu-toolchain-r-test
           packages:
           - google-chrome-beta
+          - g++-4.9
       script: ./travis-script.sh
 #    - stage: test
 #      env: TO_TEST=Karma/SauceLabs/Chrome_Old
